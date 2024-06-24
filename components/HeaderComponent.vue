@@ -25,7 +25,12 @@
         <li>
           <NuxtLink to="/layers">Layers Section</NuxtLink>
         </li>
+        <li>
+          <NuxtLink to="/physics">Physics</NuxtLink>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
+<script setup lang="ts">
+</script>
