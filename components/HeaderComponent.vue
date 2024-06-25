@@ -17,7 +17,10 @@
     <nav>
       <ul>
         <li>
-          <NuxtLink to="/">Boxes</NuxtLink>
+          <NuxtLink to="/">home</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/box">Boxes</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/scroll">ScrollTrigger</NuxtLink>

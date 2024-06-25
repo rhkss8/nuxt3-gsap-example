@@ -679,3 +679,8 @@ nav li a:hover {
   text-align: center;
   line-height: 100px;
 }
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding-top: 200px;
+}

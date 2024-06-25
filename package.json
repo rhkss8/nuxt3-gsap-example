@@ -10,7 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.2",
+    "axios": "^1.7.2",
     "gsap": "^3.12.5",
+    "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.12.2",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"

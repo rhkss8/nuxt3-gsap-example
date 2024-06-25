@@ -1,46 +1,34 @@
-<script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
-import gsap from 'gsap';
-
-import transitionConfig from '../helpers/transitionConfig';
-
-const main = ref();
-let tl;
-let ctx;
-
-definePageMeta({
-  pageTransition: transitionConfig,
-});
-
-const toggleTimeline = () => {
-  tl.reversed(!tl.reversed());
-};
-
-onMounted(() => {
-  ctx = gsap.context((self) => {
-    const boxes = self.selector('.box');
-    tl = gsap
-        .timeline()
-        .to(boxes[0], { x: 120, rotation: 360 })
-        .to(boxes[1], { x: -120, rotation: -360 }, '<')
-        .to(boxes[2], { y: -166 })
-        .reverse();
-  }, main.value); // <- Scope!
-});
-
-onUnmounted(() => {
-  ctx.revert(); // <- Easy Cleanup!
-});
-</script>
-
 <template>
-  <section class="boxes-container" ref="main">
-    <h1>Use the button to toggle a Timeline</h1>
-    <div>
-      <button @click="toggleTimeline">Toggle Timeline</button>
+  <div class="container">
+    <h1>Create Zoom Meeting</h1>
+    <button @click="createMeeting">Create Meeting</button>
+    <div v-if="meeting">
+      <h2>Meeting Created</h2>
+      <p>ID: {{ meeting.id }}</p>
+      <p>Topic: {{ meeting.topic }}</p>
+      <p>Join URL: <a :href="meeting.join_url" target="_blank">{{ meeting.join_url }}</a></p>
     </div>
-    <div class="box">Box 1</div>
-    <div class="box">Box 2</div>
-    <div class="box">Box 3</div>
-  </section>
+  </div>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+
+const meeting = ref(null);
+
+const createMeeting = async () => {
+  try {
+    const response = await fetch('/api/create-meeting', {
+      method: 'POST'
+    });
+    const data = await response.json();
+    if (data.success) {
+      meeting.value = data.meeting;
+    } else {
+      alert('Failed to create meeting: ' + data.message);
+    }
+  } catch (error) {
+    console.error('Error creating meeting:', error);
+  }
+};
+</script>
