@@ -1,13 +1,25 @@
 <template>
   <div class="container">
-    <h1>Create Zoom Meeting</h1>
-    <button @click="startAuth">Create Meeting</button>
-    <div v-if="meeting">
-      <h2>Meeting Created</h2>
-      <p>ID: {{ meeting.id }}</p>
-      <p>Topic: {{ meeting.topic }}</p>
-      <p>Join URL: <a :href="meeting.join_url" target="_blank">{{ meeting.join_url }}</a></p>
-    </div>
+    <section>
+      <h1>Create Zoom Meeting</h1>
+      <button @click="startAuth">Create Meeting</button>
+      <div v-if="meeting">
+        <h2>Meeting Created</h2>
+        <p>Zoom ID: {{ meeting.id }}</p>
+        <p>이름: {{ meeting.topic }}</p>
+        <p>URL: <a :href="meeting.join_url" target="_blank">{{ meeting.join_url }}</a></p>
+      </div>
+    </section>
+    <section style="margin-top: 10rem">
+      <h1>Upload video</h1>
+      <button @click="startAuth">Create Meeting</button>
+      <div v-if="meeting">
+        <h2>Meeting Created</h2>
+        <p>Zoom ID: {{ meeting.id }}</p>
+        <p>이름: {{ meeting.topic }}</p>
+        <p>URL: <a :href="meeting.join_url" target="_blank">{{ meeting.join_url }}</a></p>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -19,8 +31,6 @@ const meeting = ref(null);
 const startAuth = () => {
   const authWindow = window.open('/api/auth', 'zoom-auth', 'width=600,height=600');
   window.onSocialClose = ({token, error}) => {
-    console.log('token >>', token)
-    console.log('error >>', error)
     if (token) {
       // TODO 토큰을 저장해서 관리한다. 만료될경우에 대한 체크도 필요
       createMeeting(token)
