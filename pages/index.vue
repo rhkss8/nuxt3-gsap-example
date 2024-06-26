@@ -19,7 +19,10 @@ const meeting = ref(null);
 const startAuth = () => {
   const authWindow = window.open('/api/auth', 'zoom-auth', 'width=600,height=600');
   window.onSocialClose = ({token, error}) => {
+    console.log('token >>', token)
+    console.log('error >>', error)
     if (token) {
+      // TODO 토큰을 저장해서 관리한다. 만료될경우에 대한 체크도 필요
       createMeeting(token)
       authWindow.close()
       setTimeout(() => {
