@@ -1,5 +1,5 @@
 import { getQuery, defineEventHandler } from 'h3';
-import { createZoomMeeting } from '@/utils/zoom';
+import { createZoomMeeting }            from '~/utils/zoom.js';
 
 export default defineEventHandler(async (event) => {
 	const { access_token } = getQuery(event);
